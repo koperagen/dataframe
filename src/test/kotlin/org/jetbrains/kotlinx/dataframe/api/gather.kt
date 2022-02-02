@@ -94,29 +94,29 @@ class GatherTests {
 
     val typed = df.cast<Marker>()
 
-    @Test
-    fun gather() {
-        val mode by column<String>()
-        val temp by column<String>()
-        val gathered = typed.gather { except(name) }.cast<String>().into(mode, temp).ungroup(temp)
-
-        val expected = typed.groupBy { name }.updateGroups {
-            val cols = columns().drop(1).map { it.asColumnGroup() } // drop 'name' column
-            val dataRows = cols.map { it[0] }
-
-            val newDf = listOf(
-                name.withValues(List(cols.size) { name[0] }),
-                mode.withValues(cols.map { it.name }),
-                dataRows.map { it.getValueOrNull<String>("c1") }.toColumn("c1"),
-                dataRows.map { it.getValueOrNull<String>("c2") }.toColumn("c2"),
-                dataRows.map { it.getValueOrNull<String>("c3") }.toColumn("c3")
-            ).toDataFrame()
-
-            newDf
-        }.concat()
-
-        gathered shouldBe expected
-    }
+//    @Test
+//    fun gather() {
+//        val mode by column<String>()
+//        val temp by column<String>()
+//        val gathered = typed.gather { except(name) }.cast<String>().into(mode, temp).ungroup(temp)
+//
+//        val expected = typed.groupBy { name }.updateGroups {
+//            val cols = columns().drop(1).map { it.asColumnGroup() } // drop 'name' column
+//            val dataRows = cols.map { it[0] }
+//
+//            val newDf = listOf(
+//                name.withValues(List(cols.size) { name[0] }),
+//                mode.withValues(cols.map { it.name }),
+//                dataRows.map { it.getValueOrNull<String>("c1") }.toColumn("c1"),
+//                dataRows.map { it.getValueOrNull<String>("c2") }.toColumn("c2"),
+//                dataRows.map { it.getValueOrNull<String>("c3") }.toColumn("c3")
+//            ).toDataFrame()
+//
+//            newDf
+//        }.concat()
+//
+//        gathered shouldBe expected
+//    }
 
     @Test
     fun `generated code is fully typed`() {

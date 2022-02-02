@@ -118,15 +118,15 @@ class ApiLevels {
         val name: String
     }
 
-    @Test
-    fun extensionProperties2() {
-        val df = DataFrame.read("titanic.csv").cast<TitanicPassenger>()
-        // SampleStart
-        df.add("lastName") { name.split(",").last() }
-            .dropNulls { age }
-            .filter { survived && home.endsWith("NY") && age in 10..20 }
-        // SampleEnd
-    }
+//    @Test
+//    fun extensionProperties2() {
+//        val df = DataFrame.read("titanic.csv").cast<TitanicPassenger>()
+//        // SampleStart
+//        df.add("lastName") { name.split(",").last() }
+//            .dropNulls { age }
+//            .filter { survived && home.endsWith("NY") && age in 10..20 }
+//        // SampleEnd
+//    }
 
     @Test
     fun extensionProperties1() {

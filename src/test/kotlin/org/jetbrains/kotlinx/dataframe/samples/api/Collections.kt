@@ -26,18 +26,18 @@ class Collections {
         // SampleEnd
     }
 
-    @Test
-    fun listInterop3() {
-        val list = listOf(Input(1, 2), Input(3, 4))
-        val df = list.toDataFrame()
-
-        // SampleStart
-        @DataSchema
-        data class Input(val a: Int, val b: Int)
-
-        val df2 = df.add("c") { a + b }
-        // SampleEnd
-    }
+//    @Test
+//    fun listInterop3() {
+//        val list = listOf(Input(1, 2), Input(3, 4))
+//        val df = list.toDataFrame()
+//
+//        // SampleStart
+//        @DataSchema
+//        data class Input(val a: Int, val b: Int)
+//
+//        val df2 = df.add("c") { a + b }
+//        // SampleEnd
+//    }
 
     @DataSchema
     data class Input(val a: Int, val b: Int)
@@ -48,15 +48,15 @@ class Collections {
         val b: Int
     }
 
-    @Test
-    fun listInterop4() {
-        val list = listOf(Input(1, 2), Input(3, 4))
-        val df2 = list.toDataFrame().add("c") { a + b }
-
-        // SampleStart
-        data class Output(val a: Int, val b: Int, val c: Int)
-
-        val result = df2.toListOf<Output>()
-        // SampleEnd
-    }
+//    @Test
+//    fun listInterop4() {
+//        val list = listOf(Input(1, 2), Input(3, 4))
+//        val df2 = list.toDataFrame().add("c") { a + b }
+//
+//        // SampleStart
+//        data class Output(val a: Int, val b: Int, val c: Int)
+//
+//        val result = df2.toListOf<Output>()
+//        // SampleEnd
+//    }
 }

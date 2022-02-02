@@ -9,9 +9,9 @@ import org.junit.Test
 
 class DataColumnTests : BaseTest() {
 
-    @Test
-    fun `sort column`() {
-        typed.age.sort() shouldBe typed.sortBy { age }.age
-        typed.age.sortDesc() shouldBe typed.sortByDesc { age }.age
-    }
+//    @Test
+//    fun `sort column`() {
+//        typed.age.sort() shouldBe typed.sortBy { age }.age
+//        typed.age.sortDesc() shouldBe typed.sortByDesc { age }.age
+//    }
 }

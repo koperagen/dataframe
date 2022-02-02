@@ -28,9 +28,9 @@ class ConvertTests {
     @DataSchema
     data class Schema(val time: Instant)
 
-    @Test
-    fun `Instant to LocalDateTime`() {
-        val df = listOf(Schema(Clock.System.now())).toDataFrame()
-        df.convert { time }.toLocalDateTime()
-    }
+//    @Test
+//    fun `Instant to LocalDateTime`() {
+//        val df = listOf(Schema(Clock.System.now())).toDataFrame()
+//        df.convert { time }.toLocalDateTime()
+//    }
 }

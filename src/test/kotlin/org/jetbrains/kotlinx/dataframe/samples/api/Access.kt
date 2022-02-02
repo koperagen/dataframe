@@ -5,13 +5,13 @@ import org.junit.Test
 
 class Access : TestBase() {
 
-    @Test
-    fun getColumnByName_properties() {
-        // SampleStart
-        df.age
-        df.name.lastName
-        // SampleEnd
-    }
+//    @Test
+//    fun getColumnByName_properties() {
+//        // SampleStart
+//        df.age
+//        df.name.lastName
+//        // SampleEnd
+//    }
 
     @Test
     fun getColumnByName_accessors() {
@@ -36,7 +36,7 @@ class Access : TestBase() {
     @Test
     fun getColumn_properties() {
         // SampleStart
-        df.getColumn { age }
+//        df.getColumn { age }
         // SampleEnd
     }
 
@@ -59,7 +59,7 @@ class Access : TestBase() {
     @Test
     fun getColumnOrNull_properties() {
         // SampleStart
-        df.getColumnOrNull { age }
+//        df.getColumnOrNull { age }
         // SampleEnd
     }
 
@@ -82,7 +82,7 @@ class Access : TestBase() {
     @Test
     fun getColumns_properties() {
         // SampleStart
-        df.getColumns { age and name }
+//        df.getColumns { age and name }
         // SampleEnd
     }
 
@@ -106,7 +106,7 @@ class Access : TestBase() {
     @Test
     fun getColumnGroup_properties() {
         // SampleStart
-        df.getColumnGroup { name }
+//        df.getColumnGroup { name }
         // SampleEnd
     }
 
@@ -144,11 +144,11 @@ class Access : TestBase() {
     @Test
     fun getRowByCondition_properties() {
         // SampleStart
-        df.single { age == 45 }
-        df.first { weight != null }
-        df.minBy { age }
-        df.maxBy { name.firstName.length }
-        df.maxByOrNull { weight }
+//        df.single { age == 45 }
+//        df.first { weight != null }
+//        df.minBy { age }
+//        df.maxBy { name.firstName.length }
+//        df.maxByOrNull { weight }
         // SampleEnd
     }
 
@@ -190,8 +190,8 @@ class Access : TestBase() {
     @Test
     fun getCell_properties() {
         // SampleStart
-        df.age[1]
-        df[1].age
+//        df.age[1]
+//        df[1].age
         // SampleEnd
     }
 
@@ -208,7 +208,7 @@ class Access : TestBase() {
     @Test
     fun getColumnsByName_properties() {
         // SampleStart
-        df[df.age, df.weight]
+//        df[df.age, df.weight]
         // SampleEnd
     }
 
@@ -232,7 +232,7 @@ class Access : TestBase() {
     @Test
     fun select_properties() {
         // SampleStart
-        df.select { age and weight }
+//        df.select { age and weight }
         // SampleEnd
     }
 
@@ -296,7 +296,7 @@ class Access : TestBase() {
     @Test
     fun takeWhile() {
         // SampleStart
-        df.takeWhile { isHappy }
+//        df.takeWhile { isHappy }
         // SampleEnd
     }
 
@@ -318,14 +318,14 @@ class Access : TestBase() {
     @Test
     fun dropWhile() {
         // SampleStart
-        df.dropWhile { !isHappy }
+//        df.dropWhile { !isHappy }
         // SampleEnd
     }
 
     @Test
     fun filter_properties() {
         // SampleStart
-        df.filter { age > 18 && name.firstName.startsWith("A") }
+//        df.filter { age > 18 && name.firstName.startsWith("A") }
         // SampleEnd
     }
 
@@ -352,7 +352,7 @@ class Access : TestBase() {
     @Test
     fun filterBy_properties() {
         // SampleStart
-        df.filterBy { isHappy }
+//        df.filterBy { isHappy }
         // SampleEnd
     }
 
@@ -374,7 +374,7 @@ class Access : TestBase() {
     @Test
     fun dropWhere_properties() {
         // SampleStart
-        df.drop { weight == null || city == null }
+//        df.drop { weight == null || city == null }
         // SampleEnd
     }
 
@@ -403,9 +403,9 @@ class Access : TestBase() {
         // SampleStart
         df.dropNulls() // remove rows with null value in any column
         df.dropNulls(whereAllNull = true) // remove rows with null values in all columns
-        df.dropNulls { city } // remove rows with null value in 'city' column
-        df.dropNulls { city and weight } // remove rows with null value in 'city' OR 'weight' columns
-        df.dropNulls(whereAllNull = true) { city and weight } // remove rows with null value in 'city' AND 'weight' columns
+//        df.dropNulls { city } // remove rows with null value in 'city' column
+//        df.dropNulls { city and weight } // remove rows with null value in 'city' OR 'weight' columns
+//        df.dropNulls(whereAllNull = true) { city and weight } // remove rows with null value in 'city' AND 'weight' columns
         // SampleEnd
     }
 
@@ -414,9 +414,9 @@ class Access : TestBase() {
         // SampleStart
         df.dropNA() // remove rows containing null or Double.NaN in any column
         df.dropNA(whereAllNA = true) // remove rows with null or Double.NaN in all columns
-        df.dropNA { weight } // remove rows where 'weight' is null or Double.NaN
-        df.dropNA { age and weight } // remove rows where either 'age' or 'weight' is null or Double.NaN
-        df.dropNA(whereAllNA = true) { age and weight } // remove rows where both 'age' and 'weight' are null or Double.NaN
+//        df.dropNA { weight } // remove rows where 'weight' is null or Double.NaN
+//        df.dropNA { age and weight } // remove rows where either 'age' or 'weight' is null or Double.NaN
+//        df.dropNA(whereAllNA = true) { age and weight } // remove rows where both 'age' and 'weight' are null or Double.NaN
         // SampleEnd
     }
 
@@ -443,9 +443,9 @@ class Access : TestBase() {
     @Test
     fun byColumn_properties() {
         // SampleStart
-        df.name[0]
-        df.select { name and age }[3, 5, 6]
-        df.age[2..4]
+//        df.name[0]
+//        df.select { name and age }[3, 5, 6]
+//        df.age[2..4]
         // SampleEnd
     }
 
@@ -472,9 +472,9 @@ class Access : TestBase() {
     @Test
     fun byRow_properties() {
         // SampleStart
-        df[0].name
-        df[3, 5, 6].select { name and age }
-        df[3..5].age
+//        df[0].name
+//        df[3, 5, 6].select { name and age }
+//        df[3..5].age
         // SampleEnd
     }
 
@@ -526,9 +526,9 @@ class Access : TestBase() {
     @Test
     fun distinctColumns_properties() {
         // SampleStart
-        df.distinct { age and name }
+//        df.distinct { age and name }
         // same as
-        df.select { age and name }.distinct()
+//        df.select { age and name }.distinct()
         // SampleEnd
     }
 
@@ -553,7 +553,7 @@ class Access : TestBase() {
     @Test
     fun countDistinctColumns_properties() {
         // SampleStart
-        df.countDistinct { age and name }
+//        df.countDistinct { age and name }
         // SampleEnd
     }
 
@@ -585,9 +585,9 @@ class Access : TestBase() {
     @Test
     fun distinctBy_properties() {
         // SampleStart
-        df.distinctBy { age and name }
+//        df.distinctBy { age and name }
         // same as
-        df.groupBy { age and name }.mapToRows { group.first() }
+//        df.groupBy { age and name }.mapToRows { group.first() }
         // SampleEnd
     }
 
@@ -616,12 +616,12 @@ class Access : TestBase() {
     @Test
     fun columnSelectorsUsages() {
         // SampleStart
-        df.select { age and name }
-        df.fillNaNs { dfsOf<Double>() }.withZero()
-        df.remove { cols { it.hasNulls() } }
-        df.update { city }.notNull { it.lowercase() }
-        df.gather { colsOf<Number>() }.into("key", "value")
-        df.move { name.firstName and name.lastName }.after { city }
+//        df.select { age and name }
+//        df.fillNaNs { dfsOf<Double>() }.withZero()
+//        df.remove { cols { it.hasNulls() } }
+//        df.update { city }.notNull { it.lowercase() }
+//        df.gather { colsOf<Number>() }.into("key", "value")
+//        df.move { name.firstName and name.lastName }.after { city }
         // SampleEnd
     }
 
@@ -629,32 +629,32 @@ class Access : TestBase() {
     fun columnSelectors_properties() {
         // SampleStart
         // by column name
-        df.select { it.name }
-        df.select { name }
+//        df.select { it.name }
+//        df.select { name }
 
         // by column path
-        df.select { name.firstName }
+//        df.select { name.firstName }
 
         // with a new name
-        df.select { name named "Full Name" }
+//        df.select { name named "Full Name" }
 
         // converted
-        df.select { name.firstName.map { it.lowercase() } }
+//        df.select { name.firstName.map { it.lowercase() } }
 
         // column arithmetics
-        df.select { 2021 - age }
+//        df.select { 2021 - age }
 
         // two columns
-        df.select { name and age }
+//        df.select { name and age }
 
         // range of columns
-        df.select { name..age }
+//        df.select { name..age }
 
         // all children of ColumnGroup
-        df.select { name.all() }
+//        df.select { name.all() }
 
         // dfs traversal of all children columns
-        df.select { name.allDfs() }
+//        df.select { name.allDfs() }
 
         // SampleEnd
     }
@@ -801,7 +801,7 @@ class Access : TestBase() {
         df.select { allDfs().filter { it.name.startsWith("year") } }
 
         // exclude columns from column set
-        df.select { allDfs().except { age } }
+//        df.select { allDfs().except { age } }
         // SampleEnd
     }
 
@@ -809,15 +809,15 @@ class Access : TestBase() {
     fun forRows_properties() {
         // SampleStart
         for (row in df) {
-            println(row.age)
+//            println(row.age)
         }
 
         df.forEachRow {
-            println(it.age)
+//            println(it.age)
         }
 
         df.rows().forEach {
-            println(it.age)
+//            println(it.age)
         }
         // SampleEnd
     }
@@ -891,7 +891,7 @@ class Access : TestBase() {
         // SampleStart
         df.xs("Charlie", "Chaplin")
 
-        df.xs("Moscow", true) { city and isHappy }
+//        df.xs("Moscow", true) { city and isHappy }
         // SampleEnd
     }
 
@@ -900,7 +900,7 @@ class Access : TestBase() {
         // SampleStart
         df.values()
         df.values(byRows = true)
-        df.values { age and weight }
+//        df.values { age and weight }
         // SampleEnd
     }
 }

@@ -32,43 +32,43 @@ class SeriesTests {
 
     // Generated code
 
-    @DataSchema
-    interface Weather {
-        val city: String
-        val day: Int
-        val temp: Int
-    }
+//    @DataSchema
+//    interface Weather {
+//        val city: String
+//        val day: Int
+//        val temp: Int
+//    }
 
-    val typed = df.cast<Weather>()
+//    val typed = df.cast<Weather>()
 
-    @Test
-    fun `diff test`() {
-        val withDiff = typed
-            .sortBy { city and day }
-            .groupBy { city }
-            .add("diff") { diff { temp } ?: 0 }
-            .concat()
+//    @Test
+//    fun `diff test`() {
+//        val withDiff = typed
+//            .sortBy { city and day }
+//            .groupBy { city }
+//            .add("diff") { diff { temp } ?: 0 }
+//            .concat()
+//
+//        val srcData = typed.rows().map { (it.city to it.day) to it.temp }.toMap()
+//        val expected = typed.sortBy { city and day }.rows().map { row -> srcData[row.city to (row.day - 1)]?.let { row.temp - it } ?: 0 }
+//        withDiff["diff"].toList() shouldBe expected
+//    }
 
-        val srcData = typed.rows().map { (it.city to it.day) to it.temp }.toMap()
-        val expected = typed.sortBy { city and day }.rows().map { row -> srcData[row.city to (row.day - 1)]?.let { row.temp - it } ?: 0 }
-        withDiff["diff"].toList() shouldBe expected
-    }
-
-    @Test
-    fun `movingAverage`() {
-        val k = 3
-        val withMa = typed
-            .groupBy { city }
-            .sortBy { city and day }
-            .add("ma_temp") { it.movingAverage(k) { it.temp } }
-            .concat()
-
-        val srcData = typed.rows().map { (it.city to it.day) to it.temp }.toMap()
-        val expected = typed
-            .sortBy { city and day }
-            .rows()
-            .map { row -> (0 until k).map { srcData[row.city to row.day - it] }.filterNotNull().let { it.sum().toDouble() / it.size } }
-
-        withMa["ma_temp"].toList() shouldBe expected
-    }
+//    @Test
+//    fun `movingAverage`() {
+//        val k = 3
+//        val withMa = typed
+//            .groupBy { city }
+//            .sortBy { city and day }
+//            .add("ma_temp") { it.movingAverage(k) { it.temp } }
+//            .concat()
+//
+//        val srcData = typed.rows().map { (it.city to it.day) to it.temp }.toMap()
+//        val expected = typed
+//            .sortBy { city and day }
+//            .rows()
+//            .map { row -> (0 until k).map { srcData[row.city to row.day - it] }.filterNotNull().let { it.sum().toDouble() / it.size } }
+//
+//        withMa["ma_temp"].toList() shouldBe expected
+//    }
 }
