@@ -94,6 +94,12 @@ public fun dataFrameOf(columns: Iterable<AnyBaseColumn>): AnyFrame {
     return DataFrameImpl<Unit>(cols, nrow)
 }
 
+public fun <T> dataFrameOf(columns: Iterable<AnyBaseColumn>, context: T): DataFrame<T> {
+    val cols = columns.map { it.unbox() }
+    val nrow = if (cols.isEmpty()) 0 else cols[0].size
+    return DataFrameImpl(cols, nrow, context)
+}
+
 public fun dataFrameOf(vararg header: ColumnReference<*>): DataFrameBuilder = DataFrameBuilder(header.map { it.name() })
 
 public fun dataFrameOf(vararg columns: AnyBaseColumn): AnyFrame = dataFrameOf(columns.asIterable())

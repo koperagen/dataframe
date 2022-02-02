@@ -23,7 +23,10 @@ import org.jetbrains.kotlinx.dataframe.impl.aggregation.GroupByReceiverImpl
 import org.jetbrains.kotlinx.dataframe.impl.columns.resolveSingle
 import org.jetbrains.kotlinx.dataframe.io.renderToString
 
-internal open class DataFrameImpl<T>(cols: List<AnyCol>, val nrow: Int) : DataFrame<T>, AggregatableInternal<T> {
+internal open class DataFrameImpl<T>(cols: List<AnyCol>, val nrow: Int, private val _context: T? = null) : DataFrame<T>, AggregatableInternal<T> {
+
+    override val context: T
+        get() = _context ?: TODO()
 
     private val columnsMap: Map<String, Int>
 

@@ -30,6 +30,8 @@ public interface DataFrame<out T> : Aggregatable<T>, ColumnsContainer<T> {
         public fun empty(nrow: Int = 0): AnyFrame = if (nrow == 0) Empty else DataFrameImpl<Unit>(emptyList(), nrow)
     }
 
+    public val context: T get() = TODO()
+
     // region columns
 
     public fun columnNames(): List<String>
