@@ -1,7 +1,7 @@
 plugins {
     application
     kotlin("jvm")
-    kotlin("plugin.dataframe")
+//    kotlin("plugin.dataframe")
 }
 
 repositories {
@@ -19,12 +19,12 @@ dependencies {
 // Make IDE aware of the generated code:
 kotlin.sourceSets.getByName("main").kotlin.srcDir("build/generated/ksp/main/kotlin/")
 
-dataframes {
-    schema {
-        data = "src/main/resources/titanic.csv"
-        name = "org.jetbrains.kotlinx.dataframe.examples.titanic.ml.Passenger"
-        csvOptions {
-            delimiter = ';'
-        }
-    }
-}
+//dataframes {
+//    schema {
+//        data = "src/main/resources/titanic.csv"
+//        name = "org.jetbrains.kotlinx.dataframe.examples.titanic.ml.Passenger"
+//        csvOptions {
+//            delimiter = ';'
+//        }
+//    }
+//}

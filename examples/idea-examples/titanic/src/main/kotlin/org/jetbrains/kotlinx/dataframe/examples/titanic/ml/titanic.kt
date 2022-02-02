@@ -37,37 +37,37 @@ fun main() {
     // Set Locale for correct number parsing
     Locale.setDefault(Locale.FRANCE)
 
-    val df = Passenger.readCSV()
+//    val df = Passenger.readCSV()
 
     val pclass by column<Int>()
 
     // Calculating imputing values
-    val (train, test) = df
-        .rename { it.`﻿pclass`}.into(pclass)
-        // imputing
-        .fillNulls { sibsp and parch and age and fare }.perCol { it.mean() }
-        .fillNulls { sex }.withValue("female")
-        // one hot encoding
-        .pivotMatches { pclass and sex }
-        // feature extraction
-        .select { survived and pclass and sibsp and parch and age and fare and sex}
-        .shuffle()
-        .toTrainTest(0.7) { survived }
+//    val (train, test) = df
+//        .rename { it.`﻿pclass`}.into(pclass)
+//        // imputing
+//        .fillNulls { sibsp and parch and age and fare }.perCol { it.mean() }
+//        .fillNulls { sex }.withValue("female")
+//        // one hot encoding
+//        .pivotMatches { pclass and sex }
+//        // feature extraction
+//        .select { survived and pclass and sibsp and parch and age and fare and sex}
+//        .shuffle()
+//        .toTrainTest(0.7) { survived }
 
-    model.use {
-        it.compile(
-            optimizer = Adam(),
-            loss = Losses.SOFT_MAX_CROSS_ENTROPY_WITH_LOGITS,
-            metric = Metrics.ACCURACY
-        )
-
-        it.summary()
-        it.fit(dataset = train, epochs = EPOCHS, batchSize = TRAINING_BATCH_SIZE)
-
-        val accuracy = it.evaluate(dataset = test, batchSize = TEST_BATCH_SIZE).metrics[Metrics.ACCURACY]
-
-        println("Accuracy: $accuracy")
-    }
+//    model.use {
+//        it.compile(
+//            optimizer = Adam(),
+//            loss = Losses.SOFT_MAX_CROSS_ENTROPY_WITH_LOGITS,
+//            metric = Metrics.ACCURACY
+//        )
+//
+//        it.summary()
+//        it.fit(dataset = train, epochs = EPOCHS, batchSize = TRAINING_BATCH_SIZE)
+//
+//        val accuracy = it.evaluate(dataset = test, batchSize = TEST_BATCH_SIZE).metrics[Metrics.ACCURACY]
+//
+//        println("Accuracy: $accuracy")
+//    }
 }
 
 fun <T> DataFrame<T>.toTrainTest(trainRatio: Double, yColumn: ColumnSelector<T, Number>): Pair<OnHeapDataset, OnHeapDataset> =

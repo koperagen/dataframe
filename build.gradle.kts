@@ -1,4 +1,4 @@
-import org.jetbrains.dataframe.gradle.DataSchemaVisibility.IMPLICIT_PUBLIC
+//import org.jetbrains.dataframe.gradle.DataSchemaVisibility.IMPLICIT_PUBLIC
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlinx.publisher.apache2
 import org.jetbrains.kotlinx.publisher.developer
@@ -10,13 +10,13 @@ plugins {
     kotlin("libs.publisher") version libs.versions.libsPublisher
     kotlin("plugin.serialization") version libs.versions.kotlin
     kotlin("jupyter.api") version libs.versions.kotlinJupyter
-    kotlin("plugin.dataframe") version libs.versions.dataframe
+//    kotlin("plugin.dataframe") version libs.versions.dataframe
 
     id("org.jetbrains.dokka") version libs.versions.dokka
     id("org.jetbrains.dataframe.generator")
 
     id("io.github.devcrocod.korro") version libs.versions.korro
-    id("org.jmailen.kotlinter") version libs.versions.ktlint
+//    id("org.jmailen.kotlinter") version libs.versions.ktlint
 
 }
 
@@ -28,6 +28,12 @@ repositories {
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
     maven(jupyterApiTCRepo)
+}
+
+allprojects {
+    repositories {
+        maven(url = "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev/")
+    }
 }
 
 configurations {
@@ -54,6 +60,12 @@ dependencies {
 
 kotlin {
     explicitApi()
+}
+
+val compileKotlin: KotlinCompile by tasks
+
+compileKotlin.kotlinOptions {
+    freeCompilerArgs += "-Xcontext-receivers"
 }
 
 tasks.withType<JavaCompile> {
@@ -146,41 +158,41 @@ kotlinPublications {
         }
     }
 }
+//
+//tasks.lintKotlinMain {
+//    exclude("**/*keywords*/**")
+//    exclude {
+//        it.name.endsWith(".Generated.kt")
+//    }
+//    exclude {
+//        it.name.endsWith("\$Extensions.kt")
+//    }
+//}
+//
+//tasks.lintKotlinTest {
+//    exclude {
+//        it.name.endsWith(".Generated.kt")
+//    }
+//    exclude {
+//        it.name.endsWith("\$Extensions.kt")
+//    }
+//    enabled = true
+//}
 
-tasks.lintKotlinMain {
-    exclude("**/*keywords*/**")
-    exclude {
-        it.name.endsWith(".Generated.kt")
-    }
-    exclude {
-        it.name.endsWith("\$Extensions.kt")
-    }
-}
-
-tasks.lintKotlinTest {
-    exclude {
-        it.name.endsWith(".Generated.kt")
-    }
-    exclude {
-        it.name.endsWith("\$Extensions.kt")
-    }
-    enabled = true
-}
-
-kotlinter {
-    ignoreFailures = false
-    reporters = arrayOf("checkstyle", "plain")
-    experimentalRules = true
-    disabledRules = arrayOf(
-            "no-wildcard-imports",
-            "experimental:spacing-between-declarations-with-annotations",
-            "experimental:enum-entry-name-case",
-            "experimental:argument-list-wrapping",
-            "experimental:annotation",
-            "max-line-length",
-            "filename"
-    )
-}
+//kotlinter {
+//    ignoreFailures = false
+//    reporters = arrayOf("checkstyle", "plain")
+//    experimentalRules = true
+//    disabledRules = arrayOf(
+//            "no-wildcard-imports",
+//            "experimental:spacing-between-declarations-with-annotations",
+//            "experimental:enum-entry-name-case",
+//            "experimental:argument-list-wrapping",
+//            "experimental:annotation",
+//            "max-line-length",
+//            "filename"
+//    )
+//}
 
 korro {
     docs = fileTree(rootProject.rootDir) {
@@ -239,11 +251,11 @@ kotlin.sourceSets {
     }
 }
 
-dataframes {
-    schema {
-        sourceSet = "test"
-        visibility = IMPLICIT_PUBLIC
-        data = "https://raw.githubusercontent.com/Kotlin/dataframe/master/data/jetbrains_repositories.csv"
-        name = "org.jetbrains.kotlinx.dataframe.samples.api.Repository"
-    }
-}
+//dataframes {
+//    schema {
+//        sourceSet = "test"
+//        visibility = IMPLICIT_PUBLIC
+//        data = "https://raw.githubusercontent.com/Kotlin/dataframe/master/data/jetbrains_repositories.csv"
+//        name = "org.jetbrains.kotlinx.dataframe.samples.api.Repository"
+//    }
+//}

@@ -23,6 +23,7 @@ pluginManagement {
     repositories {
         mavenLocal()
         gradlePluginPortal()
+        maven(url = "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev/")
     }
 }
 
