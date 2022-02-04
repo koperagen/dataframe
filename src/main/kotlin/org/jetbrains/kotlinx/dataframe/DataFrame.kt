@@ -26,8 +26,8 @@ import kotlin.reflect.KType
 public interface DataFrame<out T> : Aggregatable<T>, ColumnsContainer<T> {
 
     public companion object {
-        public val Empty: AnyFrame = DataFrameImpl<Unit>(emptyList(), 0)
-        public fun empty(nrow: Int = 0): AnyFrame = if (nrow == 0) Empty else DataFrameImpl<Unit>(emptyList(), nrow)
+        public val Empty: AnyFrame = DataFrameImpl(emptyList(), 0, Any())
+        public fun empty(nrow: Int = 0): AnyFrame = if (nrow == 0) Empty else DataFrameImpl(emptyList(), nrow, Any())
     }
 
     public val context: T get() = TODO()

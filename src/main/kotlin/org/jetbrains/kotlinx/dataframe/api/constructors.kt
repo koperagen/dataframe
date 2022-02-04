@@ -156,7 +156,7 @@ public class DataFrameBuilder(private val header: List<String>) {
                 list[row * ncol + col]
             }
             DataColumn.createWithTypeInference(header[col], colValues)
-        }.toDataFrame()
+        }.toDataFrameByContext(Any())
     }
 
     public operator fun invoke(args: Sequence<Any?>): AnyFrame = invoke(*args.toList().toTypedArray())

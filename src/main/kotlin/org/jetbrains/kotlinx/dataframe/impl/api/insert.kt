@@ -4,7 +4,7 @@ import org.jetbrains.kotlinx.dataframe.AnyBaseColumn
 import org.jetbrains.kotlinx.dataframe.DataColumn
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.cast
-import org.jetbrains.kotlinx.dataframe.api.toDataFrame
+import org.jetbrains.kotlinx.dataframe.api.toDataFrameByContext
 import org.jetbrains.kotlinx.dataframe.columns.ColumnGroup
 import org.jetbrains.kotlinx.dataframe.columns.ColumnPath
 import org.jetbrains.kotlinx.dataframe.impl.columns.tree.ReadonlyTreeNode
@@ -115,7 +115,7 @@ internal fun <T> insertImpl(
             } else column.rename(name)
         } else {
             val newDf =
-                insertImpl<Unit>(null, columns, treeNode?.get(name), childDepth)
+                insertImpl<Unit>(null, columns, treeNode?.get(name), childDepth).cast(df!!.context)
             DataColumn.createColumnGroup(name, newDf) // new node needs to be created
         }
         if (insertionIndex == Int.MAX_VALUE) {
@@ -126,5 +126,5 @@ internal fun <T> insertImpl(
         }
     }
 
-    return newColumns.toDataFrame().cast()
+    return newColumns.toDataFrameByContext(df?.context).cast()
 }

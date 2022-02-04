@@ -7,7 +7,7 @@ import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.cast
 import org.jetbrains.kotlinx.dataframe.api.emptyDataFrame
 import org.jetbrains.kotlinx.dataframe.api.name
-import org.jetbrains.kotlinx.dataframe.api.toDataFrame
+import org.jetbrains.kotlinx.dataframe.api.toDataFrameByContext
 import org.jetbrains.kotlinx.dataframe.columns.ColumnGroup
 import org.jetbrains.kotlinx.dataframe.columns.ColumnWithPath
 import org.jetbrains.kotlinx.dataframe.columns.UnresolvedColumnsPolicy
@@ -55,12 +55,12 @@ internal fun <T> DataFrame<T>.removeImpl(allowMissingColumns: Boolean = false, c
             } else newCols.add(column)
         }
         if (newCols.isEmpty()) return null
-        return newCols.toDataFrame()
+        return newCols.toDataFrameByContext(context)
     }
 
     val newDf = dfs(columns(), colWithPaths, root) ?: emptyDataFrame(nrow)
 
     val removedColumns = root.allRemovedColumns().map { it.pathFromRoot() to it }.sortedBy { originalOrder[it.first] }.map { it.second }
 
-    return RemoveResult(newDf.cast(), removedColumns)
+    return RemoveResult(newDf.cast(context), removedColumns)
 }

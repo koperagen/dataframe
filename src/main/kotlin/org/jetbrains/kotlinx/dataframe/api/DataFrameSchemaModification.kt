@@ -10,12 +10,15 @@ import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.Selector
 import org.jetbrains.kotlinx.dataframe.columns.ColumnAccessor
 import org.jetbrains.kotlinx.dataframe.columns.ColumnReference
+import org.jetbrains.kotlinx.dataframe.columns.ColumnSet
 import org.jetbrains.kotlinx.dataframe.columns.ColumnWithPath
+import org.jetbrains.kotlinx.dataframe.columns.UnresolvedColumnsPolicy
 import org.jetbrains.kotlinx.dataframe.impl.api.flattenImpl
 import org.jetbrains.kotlinx.dataframe.impl.api.removeImpl
 import org.jetbrains.kotlinx.dataframe.impl.api.reorderImpl
 import org.jetbrains.kotlinx.dataframe.impl.api.xsImpl
 import org.jetbrains.kotlinx.dataframe.impl.columnName
+import org.jetbrains.kotlinx.dataframe.impl.columns.resolve
 import org.jetbrains.kotlinx.dataframe.impl.columns.toColumnSet
 import org.jetbrains.kotlinx.dataframe.impl.columns.toColumns
 import org.jetbrains.kotlinx.dataframe.impl.removeAt
@@ -83,6 +86,13 @@ public fun <T, C> DataFrame<T>.flatten(
 // region select
 
 public fun <T> DataFrame<T>.select(columns: ColumnsSelector<T, *>): DataFrame<T> = get(columns).toDataFrame().cast()
+
+public fun <T> DataFrame<T>.select1(columns: context(T) ColumnsSelectionDsl<T>.(ColumnsSelectionDsl<T>) -> ColumnSet<*>): DataFrame<T> =
+    with(context) {
+        columns.toColumns().resolve(this@select1, UnresolvedColumnsPolicy.Fail).map<ColumnWithPath<*>, DataColumn<*>> { it.data }
+            .toDataFrame().cast()
+    }
+
 public fun <T> DataFrame<T>.select(vararg columns: KProperty<*>): DataFrame<T> = select(columns.map { it.columnName })
 public fun <T> DataFrame<T>.select(vararg columns: String): DataFrame<T> = select(columns.asIterable())
 public fun <T> DataFrame<T>.select(vararg columns: Column): DataFrame<T> = select { columns.toColumns() }

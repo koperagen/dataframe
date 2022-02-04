@@ -95,6 +95,15 @@ internal fun <C> createColumnSet(resolver: (ColumnResolutionContext) -> List<Col
 
 // region toColumns
 
+internal fun <TD, T : DataFrame<TD>, C> (context(TD) T.(T) -> ColumnSet<C>).toColumns(
+    createReceiver: (ColumnResolutionContext) -> T
+): ColumnSet<C> =
+    createColumnSet {
+        val receiver = createReceiver(it)
+        val columnSet = this(receiver.context, receiver, receiver)
+        columnSet.resolve(receiver, it.unresolvedColumnsPolicy)
+    }
+
 internal fun <TD, T : DataFrame<TD>, C> Selector<T, ColumnSet<C>>.toColumns(
     createReceiver: (ColumnResolutionContext) -> T
 ): ColumnSet<C> =
@@ -115,6 +124,11 @@ internal fun <T, C> SortColumnsSelector<T, C>.toColumns(): ColumnSet<C> = toColu
 }
 
 internal fun <T, C> ColumnsSelector<T, C>.toColumns(): ColumnSet<C> = toColumns {
+    object : DataFrameReceiver<T>(it.df.cast(), it.unresolvedColumnsPolicy), ColumnsSelectionDsl<T> { }
+}
+
+
+internal fun <T, C> (context(T) ColumnsSelectionDsl<T>.(ColumnsSelectionDsl<T>) -> ColumnSet<C>).toColumns(): ColumnSet<C> = toColumns {
     object : DataFrameReceiver<T>(it.df.cast(), it.unresolvedColumnsPolicy), ColumnsSelectionDsl<T> { }
 }
 

@@ -27,6 +27,8 @@ internal open class DataFrameReceiver<T>(
     private val unresolvedColumnsPolicy: UnresolvedColumnsPolicy
 ) : DataFrameImpl<T>(source.columns(), source.nrow), SingleColumn<DataRow<T>> {
 
+    override val context: T get() = source.context
+
     private fun <R> DataColumn<R>?.check(path: ColumnPath): DataColumn<R>? =
         when (this) {
             null -> when (unresolvedColumnsPolicy) {

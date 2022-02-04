@@ -137,10 +137,10 @@ public fun <T> DataFrame<T>.singleOrNull(): DataRow<T>? = rows().singleOrNull()
 
 // region filter
 
-public fun <T> DataFrame<T>.filter(predicate: RowFilter<T>): DataFrame<T> =
+public fun <T> DataFrame<T>.filter(predicate: context(T) DataRow<T>.(DataRow<T>) -> Boolean): DataFrame<T> =
     indices.filter {
         val row = get(it)
-        predicate(row, row)
+        predicate(context, row, row)
     }.let { get(it) }
 
 public fun <T> DataFrame<T>.filterBy(column: ColumnSelector<T, Boolean>): DataFrame<T> = getRows(getColumn(column).toList().toIndices())
@@ -309,6 +309,9 @@ public fun <T> Iterable<DataRow<T>>.toDataFrame(): DataFrame<T> {
         uniqueDf[permutation]
     } else map { it.toDataFrame() }.concat()
 }
+
+@JvmName("toDataFrameAnyColumnContext")
+public fun <T> Iterable<AnyBaseColumn>.toDataFrameByContext(context: T): DataFrame<T> = dataFrameOf(this, context)
 
 @JvmName("toDataFrameAnyColumn")
 public fun Iterable<AnyBaseColumn>.toDataFrame(): AnyFrame = dataFrameOf(this)

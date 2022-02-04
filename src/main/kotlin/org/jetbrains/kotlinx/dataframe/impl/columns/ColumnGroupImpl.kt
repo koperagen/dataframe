@@ -21,7 +21,7 @@ import kotlin.reflect.KType
 internal val anyRowType = createTypeWithArgument<AnyRow>()
 
 internal open class ColumnGroupImpl<T>(val name: String, df: DataFrame<T>) :
-    DataFrameImpl<T>(df.columns(), df.nrow),
+    DataFrameImpl<T>(df.columns(), df.nrow, df.context),
     DataColumnInternal<DataRow<T>>,
     DataColumnGroup<T> {
 
