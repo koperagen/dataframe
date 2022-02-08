@@ -11,8 +11,8 @@ import org.jetbrains.kotlinx.dataframe.api.dataFrameOf
 import org.jetbrains.kotlinx.dataframe.api.filter
 import org.jetbrains.kotlinx.dataframe.api.print
 import org.jetbrains.kotlinx.dataframe.api.select1
-import org.jetbrains.kotlinx.dataframe.temp.PersonRecord.Schema.firstName
-import org.jetbrains.kotlinx.dataframe.temp.PersonRecord.Schema.lastName
+import org.jetbrains.kotlinx.dataframe.temp.PersonRecord.Schema.Companion.firstName
+import org.jetbrains.kotlinx.dataframe.temp.PersonRecord.Schema.Companion.lastName
 
 @DataSchema
 public interface PersonRecord {
@@ -23,7 +23,10 @@ public interface PersonRecord {
     public val weight: Int?
     public val isHappy: Boolean
 
-    public object Schema {
+    // Добавлено плагином
+    // Типовой параметр датафрейма можно ограничить каким-то интерфейсом, чтобы нельзя было написать
+    // val df: DataFrame<PersonRecord> <- правильно DataFrame<PersonRecord.Schema>
+    public interface Schema /* : AbstractSchema */ {
         public val DataRow<Schema>.firstName: String get() = this["firstName"] as String
         public val ColumnsContainer<Schema>.firstName: DataColumn<String> get() = this["firstName"] as DataColumn<String>
 
@@ -41,6 +44,8 @@ public interface PersonRecord {
 
         public val DataRow<Schema>.isHappy: Boolean get() = this["isHappy"] as Boolean
         public val ColumnsContainer<Schema>.isHappy: DataColumn<Boolean> get() = this["isHappy"] as DataColumn<Boolean>
+
+        public companion object : Schema
     }
 }
 
