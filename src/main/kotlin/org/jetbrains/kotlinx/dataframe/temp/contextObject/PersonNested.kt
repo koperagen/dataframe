@@ -1,4 +1,4 @@
-package org.jetbrains.kotlinx.dataframe.temp
+package org.jetbrains.kotlinx.dataframe.temp.contextObject
 
 import org.jetbrains.kotlinx.dataframe.ColumnsContainer
 import org.jetbrains.kotlinx.dataframe.DataColumn

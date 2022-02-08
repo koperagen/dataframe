@@ -1,4 +1,4 @@
-package org.jetbrains.kotlinx.dataframe.temp
+package org.jetbrains.kotlinx.dataframe.temp.contextObject
 
 import org.jetbrains.kotlinx.dataframe.ColumnsContainer
 import org.jetbrains.kotlinx.dataframe.DataColumn
@@ -11,8 +11,8 @@ import org.jetbrains.kotlinx.dataframe.api.dataFrameOf
 import org.jetbrains.kotlinx.dataframe.api.filter
 import org.jetbrains.kotlinx.dataframe.api.print
 import org.jetbrains.kotlinx.dataframe.api.select1
-import org.jetbrains.kotlinx.dataframe.temp.PersonRecord.Schema.Companion.firstName
-import org.jetbrains.kotlinx.dataframe.temp.PersonRecord.Schema.Companion.lastName
+import org.jetbrains.kotlinx.dataframe.temp.contextObject.PersonRecord.Schema.Companion.firstName
+import org.jetbrains.kotlinx.dataframe.temp.contextObject.PersonRecord.Schema.Companion.lastName
 
 @DataSchema
 public interface PersonRecord {

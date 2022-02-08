@@ -1,4 +1,4 @@
-package org.jetbrains.kotlinx.dataframe.temp
+package org.jetbrains.kotlinx.dataframe.temp.contextObject
 
 
 // Вроде бы требований к API компилятора не больше, чем у варианта с object : DataFrame
