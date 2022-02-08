@@ -16,24 +16,28 @@ public interface Cars {
     public val year: Int
 
     // Сгенерировано плагином
-    public open class Row : DataRow {
+    public interface Row : DataRow {
         public val year: Int get() = TODO()
     }
 
-    public open class Frame : DataFrame<Frame, Row> {
+    public interface Frame : DataFrame<Frame, Row> {
         public val year: DataColumn<Int> get() = TODO()
 
+        override fun get(index: Int): Row = object : Row { }
+
         override fun get(index: List<Int>): Frame {
-            return Frame()
+            return FrameImpl()
         }
     }
+
+    private class FrameImpl : Frame
 }
 
 public fun filterOldCars_goal(df: Cars.Frame) {
     val df1 = df
         .add("age") { 2022 - year }
         .run {
-            class CarsRow1 : Cars.Row() {
+            class CarsRow1 : Cars.Row {
                 val age: Int = TODO()
             }
             class DF : DataFrame<DF, CarsRow1> {
