@@ -88,7 +88,7 @@ public fun main() {
 
     // Гарантированно работающий костыль - сделать аналог select, какой-то там pick { columnGroup.intColumn[0] }
 
-    updatedDf.select1 { fullName }.print()
+//    updatedDf.pick { fullName.lastName[0] }.print()
 
     // Пример с вложенными схемами см. в PersonNested
 }

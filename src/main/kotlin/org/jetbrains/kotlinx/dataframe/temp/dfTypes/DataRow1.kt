@@ -42,7 +42,7 @@ public fun filterOldCars_goal(df: Cars.Frame) {
             }
             class DF : DataFrame<DF, CarsRow1> {
                 /*override*/ fun create(): CarsRow1 = CarsRow1()
-                val columnAge: DataColumn<Int> = TODO()
+                val age: DataColumn<Int> = TODO()
 
                 override fun get(index: List<Int>): DF {
                     return DF()
@@ -51,12 +51,12 @@ public fun filterOldCars_goal(df: Cars.Frame) {
             DF()
         }
 
-    df1.columnAge
+    df1.age
     df1.filter { age == 20 }
 
     df1.writeCSV("old_cars.csv")
 
-    df1.filter { age == 20 }.columnAge
+    df1.filter { age == 20 }.age
 }
 
 public fun <D: DataFrame<D, R>, R: DataRow> D.filter(predicate: R.(R) -> Boolean): D =
@@ -83,3 +83,16 @@ AggregateGroupedDsl<T> : DataFrame<T>, поэтому на this доступны
 Мы не можем создать AggregateGroupedDsl, который бы расширял Cars.Frame, но вроде можно так:
 AggregateGroupedBody<D, R> = context(AggregateGroupedDsl) D.(D) -> R where D : DataFrame<D, Row>, Row : DataRow
 */
+
+// TODO ColumnGroup
+
+//public class Person : DataFrame<Person, > {
+//    public val name: Name
+//        get() {
+//            TODO()
+//        }
+//}
+//
+//public class Name : ColumnGroup<> {
+//
+//}

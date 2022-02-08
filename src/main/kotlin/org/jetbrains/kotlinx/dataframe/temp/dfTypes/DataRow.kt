@@ -20,11 +20,11 @@ public fun filterOldCars_goal(df: CarDF) {
             }
             object : DataFrame<CarsRow1> {
                 /*override*/ fun create(): CarsRow1 = CarsRow1()
-                val columnAge: DataColumn<Int> = TODO()
+                val age: DataColumn<Int> = TODO()
             }
         }
 
-    df1.columnAge
+    df1.age
     df1.filter { age == 20 }
 
     df1.writeCSV("old_cars.csv")
